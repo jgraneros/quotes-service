@@ -40,7 +40,7 @@ public class QuoteResource {
 
 
     @GET
-    public Uni<Response> getQuoteAndPersist() throws IOException, InterruptedException {
+    public Uni<Response> getQuoteAndValidate() throws IOException, InterruptedException {
         //Thread currentThread = Thread.currentThread();
         //log.info("El nombre del hilo actual es: " + currentThread.getName());
         //log.info("El ID del hilo actual es: " + currentThread.getId());
@@ -58,9 +58,6 @@ public class QuoteResource {
                             Boolean isString;
                             try {
                                 isString = this.blockingValidation(retrieved);
-                                if (isString) {
-                                    return new Exception("hola");
-                                }
                             } catch (InterruptedException e) {
                                 throw new RuntimeException(e);
                             } catch (Exception e) {
@@ -86,6 +83,10 @@ public class QuoteResource {
                 .map(retrieved -> Response.ok(retrieved).build());
     }
 
+    /**
+     * Blocking
+     * @return
+     */
     private String getQuoteFromClientHandler() {
         try {
             return client.getQuote();
@@ -107,6 +108,12 @@ public class QuoteResource {
         return frase;
     }
 
+    /**
+     * Blocking
+     * @param quote
+     * @return
+     * @throws InterruptedException
+     */
     private Boolean blockingValidation(Object quote) throws InterruptedException {
 
         Thread.sleep(30000);
