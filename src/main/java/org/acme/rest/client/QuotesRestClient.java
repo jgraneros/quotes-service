@@ -33,11 +33,11 @@ public class QuotesRestClient {
 
 
     public String getQuote() throws IOException, InterruptedException {
-
-        Thread currentThread = Thread.currentThread();
-        log.info("El nombre del hilo actual es: " + currentThread.getName());
-        log.info("El ID del hilo actual es: " + currentThread.getId());
-        return this.sendRequest(httpClient);
+            Thread.sleep(2100);
+            Thread currentThread = Thread.currentThread();
+            log.info("El nombre del hilo actual es: " + currentThread.getName());
+            log.info("El ID del hilo actual es: " + currentThread.getId());
+            return this.sendRequest(httpClient);
     }
 
 
